@@ -1,9 +1,9 @@
-🎉 **Release: Vector 2.0** 🎉
+🎉 **Release: Vector 7.0.0** 🎉
 
-Welcome to Vector 2.0! As part of our ongoing transition, the project has officially been renamed from `LSPosed` to `Vector`. While our major internal refactoring is still underway, we are releasing 2.0 now to provide a stable, feature-complete environment for those relying on legacy libxposed APIs.
+Welcome to Vector 7.0.0! As part of our ongoing transition, the project has officially been renamed from `LSPosed` to `Vector`. While our major internal refactoring is still underway, we are releasing 7.0.0 now to provide a stable, feature-complete environment for those relying on legacy libxposed APIs.
 
 ### 📚 libxposed API 100 & 101
-With the recent publication of libxposed API 101, the ecosystem is moving toward a new standard with significant breaking changes. Because API 100 was never officially published, **Vector 2.0 serves as the definitive implementation of the API 100 era**, built from the exact commit prior to the API 101 jump.
+With the recent publication of libxposed API 101, the ecosystem is moving toward a new standard with significant breaking changes. Because API 100 was never officially published, **Vector 7.0.0 serves as the definitive implementation of the API 100 era**, built from the exact commit prior to the API 101 jump.
 
 ### 🏗️ Architecture & API Updates
 *   **Vector & Zygisk Overhaul:** Officially renamed and modularized the project, featuring a completely rewritten, modern Zygisk architecture.
