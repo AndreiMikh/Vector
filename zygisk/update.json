@@ -1,6 +1,6 @@
 {
-	"version": "v2.0",
-	"versionCode": 3021,
-	"zipUrl": "https://github.com/AndreiMikh/Vector/releases/download/v2.0/Vector-v2.0-Release.zip",
+	"version": "v7.0.0",
+	"versionCode": 3050,
+	"zipUrl": "https://github.com/AndreiMikh/Vector/releases/download/v7.0.0/Vector-v7.0.0-Release.zip",
 	"changelog": "https://raw.githubusercontent.com/AndreiMikh/Vector/master/zygisk/changelog.md"
 }
