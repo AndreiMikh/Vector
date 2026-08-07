@@ -1,6 +1,6 @@
 {
-	"version": "v2.2",
-	"versionCode": 3080,
-	"zipUrl": "https://github.com/JingMatrix/Vector/releases/download/v2.2/Vector-v2.2-3080-Release.zip",
-	"changelog": "https://raw.githubusercontent.com/JingMatrix/Vector/master/zygisk/changelog.md"
+	"version": "v7.0.0",
+	"versionCode": 7000,
+	"zipUrl": "https://github.com/AndreiMikh/Vector/releases/download/v7.0.0/Vector-v7.0.0-7000-Release.zip",
+	"changelog": "https://raw.githubusercontent.com/AndreiMikh/Vector/v2.1/zygisk/changelog.md"
 }
