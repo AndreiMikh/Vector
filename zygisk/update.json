@@ -2,5 +2,5 @@
 	"version": "v7.0.0",
 	"versionCode": 3080,
 	"zipUrl": "https://github.com/AndreiMikh/Vector/releases/download/v7.0.0/Vector-v7.0.0-3080-Release.zip",
-	"changelog": "https://raw.githubusercontent.com/AndreiMikh/Vector/master/zygisk/changelog.md"
+	"changelog": "https://raw.githubusercontent.com/AndreiMikh/Vector/andrei-dev/zygisk/changelog.md"
 }
