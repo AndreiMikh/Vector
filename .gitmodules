@@ -15,10 +15,10 @@
 	url = https://github.com/JingMatrix/LSPlt
 [submodule "services/libxposed"]
 	path = services/libxposed
-	url = https://github.com/libxposed/service.git
+	https://gitlab.com/xposed_grp/LSPosed/libxposed/api.git
 [submodule "xposed/libxposed"]
 	path = xposed/libxposed
-	url = https://github.com/libxposed/api.git
+	https://gitlab.com/xposed_grp/LSPosed/libxposed/api.git
 [submodule "external/apache/commons-lang"]
 	path = external/apache/commons-lang
 	url = https://github.com/apache/commons-lang.git
