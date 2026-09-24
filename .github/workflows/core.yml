@@ -38,25 +38,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          submodules: false
+          submodules: recursive
           fetch-depth: 0
-
-      - name: Fix libxposed submodule
-        shell: bash
-        run: |
-          git submodule sync --recursive
-
-          rm -rf services/libxposed
-
-          git clone \
-            https://gitlab.com/xposed_grp/LSPosed/libxposed/service.git \
-            services/libxposed
-
-          cd services/libxposed
-          git checkout 0752891c
-          cd ../..
-
-          git submodule update --init --recursive
 
       # Before anything is built, because it needs nothing but Python and a translator's mistake
       # should not wait twenty minutes to surface. Crowdin owns the content of these files, so what
