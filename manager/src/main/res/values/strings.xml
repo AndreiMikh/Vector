@@ -158,6 +158,7 @@
 
     <!-- Modules -->
     <string name="modules_empty">No Modules Installed</string>
+    <string name="modules_scan_failed">List of Installed Packages Could Not be Read, so Which Module Device has is Unknown; Pull Down to Try Again</string>
     <plurals name="modules_updates">
         <item quantity="one">%1$d Module Can be Updated</item>
         <item quantity="other">%1$d Modules Can be Updated</item>
@@ -243,6 +244,7 @@
     <string name="scope_modules">Other Modules</string>
     <string name="scope_include_new_apps">Add New Apps Automatically</string>
     <string name="scope_include_new_apps_summary">Apps Installed, Join Module\'s Scope</string>
+    <string name="scope_include_new_apps_summary_user">Apps Installed into this User from Now on Join Module\'s Scope; Each User is Set Separately</string>
     <string name="scope_backup">Backup Scope</string>
     <string name="scope_restore">Restore Scope</string>
     <string name="scope_sort_package">By Package Name</string>
@@ -464,4 +466,14 @@
     <string name="launcher_prompt_title">Vector Has No Icon Yet</string>
     <string name="launcher_prompt_body">Vector Runs Inside Another Process Rather Than Being Installed</string>
     <string name="launcher_prompt_never">Don\'t Ask Again</string>
+    <string name="action_install_other_user">Install for Another User</string>
+    <string name="action_install_other_user_summary">Puts Module into a Profile that does Not have it, so it can be Scoped</string>
+    <string name="action_install_other_user_summary_app">Puts App into a Profile that does Not have it, so a Module in that Profile can Reach it</string>
+    <string name="action_reorder">Reorder Actions</string>
+    <string name="action_move_up">Move Up</string>
+    <string name="action_move_down">Move down</string>
+    <string name="action_install_other_user_prompt">Choose User to Install Module for</string>
+    <string name="action_install_other_user_prompt_app">Choose User to Install App for</string>
+    <string name="action_installed_other_user">Installed for %1$s</string>
+    <string name="action_install_other_user_failed">Could Not Install for %1$s</string>
 </resources>
