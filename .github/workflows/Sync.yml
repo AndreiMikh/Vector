@@ -1,0 +1,85 @@
+name: Sync Upstream
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: sync-upstream-master
+  cancel-in-progress: false
+env:
+  UPSTREAM_REPOSITORY: JingMatrix/Vector
+  SYNC_BRANCH: master
+jobs:
+  sync:
+    name: Sync Fork With Upstream
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Fork
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: true
+ 
+      - name: Configure Git
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+ 
+      - name: Fetch Upstream
+        shell: bash
+        run: |
+          echo "Upstream: $UPSTREAM_REPOSITORY"
+          echo "Branch: $SYNC_BRANCH"
+          git remote add upstream \
+            "https://github.com/${UPSTREAM_REPOSITORY}.git"
+          git fetch upstream "$SYNC_BRANCH"
+ 
+      - name: Merge Upstream Changes
+        id: merge
+        shell: bash
+        run: |
+          echo "Merging upstream/$SYNC_BRANCH into $SYNC_BRANCH"
+          if git merge --no-edit --no-ff "upstream/$SYNC_BRANCH"; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+            echo "Upstream changes merged successfully."
+          else
+            echo "::error::Merge conflicts detected."
+            CONFLICTS=$(git diff --name-only --diff-filter=U || true)
+            {
+              echo "## Upstream Sync Failed"
+              echo "Merge conflicts require manual resolution."
+              echo ""
+              echo '```text'
+              echo "$CONFLICTS"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "Conflicting files:"
+            echo "$CONFLICTS"
+            exit 1
+          fi
+
+      - name: Push Changes To Fork
+        if: steps.merge.outputs.status == 'success'
+        shell: bash
+        run: |
+          git push origin "HEAD:refs/heads/$SYNC_BRANCH"
+          echo "Successfully synced upstream changes."
+
+      - name: Sync Summary
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo "## Upstream Sync Successful"
+            echo ""
+            echo "- Upstream: $UPSTREAM_REPOSITORY"
+            echo "- Branch: $SYNC_BRANCH"
+            echo "- Destination: $GITHUB_REPOSITORY"
+            echo "- Existing commits preserved."
+            echo "- No pull request created."
+            echo "- No force push performed."
+          } >> "$GITHUB_STEP_SUMMARY"
