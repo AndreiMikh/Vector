@@ -22,13 +22,13 @@ jobs:
           ref: master
           fetch-depth: 0
           persist-credentials: true
- 
+
       - name: Configure Git
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
- 
+
       - name: Fetch Upstream
         shell: bash
         run: |
@@ -37,21 +37,36 @@ jobs:
           git remote add upstream \
             "https://github.com/${UPSTREAM_REPOSITORY}.git"
           git fetch upstream "$SYNC_BRANCH"
- 
+
+      - name: Check Sync Status
+        id: status
+        shell: bash
+        run: |
+          echo "Checking upstream synchronization..."
+          if git merge-base --is-ancestor "upstream/$SYNC_BRANCH" "HEAD"; then
+            echo "synced=true" >> "$GITHUB_OUTPUT"
+            echo "Already synchronized with upstream."
+          else
+            echo "synced=false" >> "$GITHUB_OUTPUT"
+            echo "Upstream changes detected."
+          fi
+
       - name: Merge Upstream Changes
         id: merge
+        if: steps.status.outputs.synced == 'false'
         shell: bash
         run: |
           echo "Merging upstream/$SYNC_BRANCH into $SYNC_BRANCH"
-          if git merge --no-edit --no-ff "upstream/$SYNC_BRANCH"; then
+
+          if git merge --no-edit --no-ff -X ours "upstream/$SYNC_BRANCH"; then
             echo "status=success" >> "$GITHUB_OUTPUT"
             echo "Upstream changes merged successfully."
           else
-            echo "::error::Merge conflicts detected."
+            echo "::error::Automatic merge failed."
             CONFLICTS=$(git diff --name-only --diff-filter=U || true)
             {
               echo "## Upstream Sync Failed"
-              echo "Merge conflicts require manual resolution."
+              echo "Some conflicts could not be resolved automatically."
               echo ""
               echo '```text'
               echo "$CONFLICTS"
@@ -80,6 +95,8 @@ jobs:
             echo "- Branch: $SYNC_BRANCH"
             echo "- Destination: $GITHUB_REPOSITORY"
             echo "- Existing commits preserved."
+            echo "- Conflicting sections prefer fork changes."
+            echo "- Upstream non-conflicting changes integrated."
             echo "- No pull request created."
             echo "- No force push performed."
           } >> "$GITHUB_STEP_SUMMARY"
